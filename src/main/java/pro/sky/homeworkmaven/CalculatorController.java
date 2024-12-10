@@ -1,28 +1,25 @@
 package pro.sky.homeworkmaven;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/calculator")
 public class CalculatorController {
     private final CalculatorService calculatorService;
-    private final String basePath = "/calculator";
 
     public CalculatorController(CalculatorService calculatorService){
         this.calculatorService = calculatorService;
     }
 
-    public String getBasePath(){
-        return basePath;
-    }
-
-    @GetMapping(path = basePath)
+    @GetMapping
     public String mainPage(){
         return calculatorService.mainPage();
     }
 
-    @GetMapping(path = basePath + "/plus")
+    @GetMapping("/plus")
     public String plusOperation(@RequestParam(value = "num1", required = true) Integer num1,
                              @RequestParam(value = "num2", required = true) Integer num2) {
         if (num1 == null || num2 == null){
@@ -31,7 +28,7 @@ public class CalculatorController {
         return calculatorService.plusOperation(num1, num2);
     }
 
-    @GetMapping(path = basePath + "/minus")
+    @GetMapping("/minus")
     public String minusOperation(@RequestParam(value = "num1", required = true) Integer num1,
                               @RequestParam(value = "num2", required = true) Integer num2) {
         if (num1 == null || num2 == null){
@@ -40,7 +37,7 @@ public class CalculatorController {
         return calculatorService.minusOperation(num1, num2);
     }
 
-    @GetMapping(path = basePath + "/multiply")
+    @GetMapping("/multiply")
     public String multipleOperation(@RequestParam(value = "num1", required = true) Integer num1,
                               @RequestParam(value = "num2", required = true) Integer num2) {
         if (num1 == null || num2 == null){
@@ -49,7 +46,7 @@ public class CalculatorController {
         return calculatorService.multipleOperation(num1, num2);
     }
 
-    @GetMapping(path = basePath + "/divide")
+    @GetMapping("/divide")
     public String divideOperation(@RequestParam(value = "num1", required = true) Integer num1,
                               @RequestParam(value = "num2", required = true) Integer num2) {
         if (num1 == null || num2 == null){
